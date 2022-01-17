@@ -109,9 +109,4 @@ main[b-f54q9y9bcb] {
     .navbar-toggler[b-9eqa5kfljg] {
         display: none;
     }
-
-    .collapse[b-9eqa5kfljg] {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-    }
 }

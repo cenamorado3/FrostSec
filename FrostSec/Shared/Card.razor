@@ -1,0 +1,16 @@
+﻿<div class="card p-4 m-auto">
+    @ChildContent
+</div>
+<style>
+    .card{
+        height: 100%;
+        background-color: #0197db;
+        box-shadow: rgb(55, 97, 125) 0px 20px 30px -10px;
+    }
+
+</style>
+@code{
+    [Parameter]
+    public RenderFragment? ChildContent{ get; set; }
+}
+
