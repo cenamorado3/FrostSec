@@ -1,6 +1,26 @@
 ﻿@page "/fun"
 <PageTitle>Fun</PageTitle>
+<ShelfComponent BookClasses=@shelf1></ShelfComponent>
+<br />
+<ShelfComponent BookClasses=@shelf2></ShelfComponent>
 
+<style>
+    .AzureDeployment{
+        background-color:red;
+    }
+    .ShelfComp{
+        background-color:green;
+    }
+
+    .a{
+        background-color:purple;
+    }
+    .b{
+        background-color:teal;
+    }
+
+</style>
 @code {
-
+    private List<string> shelf1 = new List<string>() { "AzureDeployment", "ShelfComp" };
+    private List<string> shelf2 = new List<string>() { "a", "b" };
 }

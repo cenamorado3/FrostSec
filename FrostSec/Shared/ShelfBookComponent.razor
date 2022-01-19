@@ -1,0 +1,30 @@
+﻿<div class="@Class book m-auto">
+    <div class="m-auto text-center text">
+        @ChildContent
+    </div>
+
+</div>
+
+<style>
+    .book{
+        height:300px;
+        width:13vw;
+        background-color:blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+   .text{
+        white-space:nowrap;
+        color:white;
+        transform:rotate(90deg);
+        position: relative;
+        right: 8px;
+   }
+    
+</style>
+
+@code{
+    [Parameter]public RenderFragment? ChildContent{ get; set; }
+    [Parameter]public string? Class{ get; set; }
+}

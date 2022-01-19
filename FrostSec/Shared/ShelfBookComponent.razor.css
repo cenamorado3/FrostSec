@@ -1,0 +1,17 @@
+﻿@media (max-width: 420px) {
+    .AzureDeployment {
+        background-color: darkgreen;
+    }
+
+    .ShelfComp {
+        background-color: darkcyan;
+    }
+
+    .a {
+        background-color: violet;
+    }
+
+    .b {
+        background-color: orchid;
+    }
+}
