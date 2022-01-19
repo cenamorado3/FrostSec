@@ -1,5 +1,5 @@
-﻿<a href="archive/@Class">
-    <div class="@Class book m-auto">
+﻿<a href="archive/@Book.Title.Replace(" ", "")">
+    <div class="@Book.CSSClass book m-auto">
         <div class="m-auto text-center text">
             @ChildContent
         </div>
@@ -31,5 +31,5 @@
 
 @code{
     [Parameter]public RenderFragment? ChildContent{ get; set; }
-    [Parameter]public string? Class{ get; set; }
+    [Parameter]public Book? Book{ get; set; }
 }

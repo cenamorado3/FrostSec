@@ -1,47 +1,27 @@
 ﻿<div class="shelf m-auto">
     <div class="flex-container m-auto">
         <div class="row w-100 mt-4">
-            <div class="col-2 m-auto">
-                <ShelfBookComponent Class="@BookClasses[0]">
-                    <p>Deploying to Azure</p>
-                </ShelfBookComponent>
-            </div>
-
-            <div class="col-2 m-auto">
-                <ShelfBookComponent Class="@BookClasses[1]">
-                    <p>The Shelf Component</p>
-                </ShelfBookComponent>
-            </div>
-
-            <div class="col-2 m-auto">
-                <ShelfBookComponent>
-                    <p class="BookComp">The Book Component</p>
-                </ShelfBookComponent>
-            </div>
-
-            <div class="col-2 m-auto">
-                <ShelfBookComponent> 
-                        <p class="Archive">The Archive</p>
-                </ShelfBookComponent>
-            </div>
-
-            <div class="col-2 m-auto">
-                <ShelfBookComponent>
-                    <p class="srltoab">Some random long title of a book</p>
-                </ShelfBookComponent>
-            </div>
+            @foreach(Book book in Books)
+            {
+                <div class="col-2 m-auto">
+                    <ShelfBookComponent Book="@book">
+                        <p>@book.Title</p>
+                    </ShelfBookComponent>
+                </div>
+            }
         </div>
     </div>
  </div>
-
 <style>
     .shelf{
         height:100%;
         width:75%;
     }
-
+    p{
+        color:white;
+    }
 </style>
 
 @code{
-    [Parameter]public List<string>? BookClasses{ get; set; }
+    [Parameter]public List<Book> Books{ get; set; }
 }

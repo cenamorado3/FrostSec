@@ -1,26 +1,76 @@
 ﻿@page "/fun"
 <PageTitle>Fun</PageTitle>
-<ShelfComponent BookClasses=@shelf1></ShelfComponent>
-<ShelfComponent BookClasses=@shelf2></ShelfComponent>
+<ShelfComponent Books=@shelf1></ShelfComponent>
+<ShelfComponent Books=@shelf2></ShelfComponent>
 
 
 <style>
     .AzureDeployment{
-        background-color:red;
     }
     .ShelfComp{
-        background-color:green;
     }
 
     .a{
-        background-color:purple;
     }
     .b{
-        background-color:teal;
     }
 
 </style>
 @code {
-    private List<string> shelf1 = new List<string>() { "AzureDeployment", "ShelfComp" };
-    private List<string> shelf2 = new List<string>() { "a", "b" };
+    private List<Book> shelf1 = new List<Book>()
+    {
+        new Book()
+        {
+            CSSClass = "AzureDeployment", 
+            Title = "Deploying To Azure"
+        },
+        new Book()
+        {
+            CSSClass = "BookComp", 
+            Title = "Building the Book Component"
+        },
+        new Book()
+        {
+            CSSClass = "ShelfComp", 
+            Title = "Building the Shelf Component"
+        },
+        new Book()
+        {
+            CSSClass = "Archive", 
+            Title = "Creating the Archive"
+        },
+        new Book()
+        {
+            CSSClass = "Fun", 
+            Title = "All together"
+        }
+    };
+    private List<Book> shelf2 = new List<Book>()
+    {
+        new Book()
+        {
+            CSSClass = "a", 
+            Title = "HTML Basics"
+        },
+        new Book()
+        {
+            CSSClass = "b", 
+            Title = "CSS Basics"
+        },
+        new Book()
+        {
+            CSSClass = "ShelfComp", 
+            Title = "Bootstrap 101"
+        },
+        new Book()
+        {
+            CSSClass = "Archive", 
+            Title = "SSL Certification"
+        },
+        new Book()
+        {
+            CSSClass = "Fun", 
+            Title = "Domains"
+        }
+    };
 }
