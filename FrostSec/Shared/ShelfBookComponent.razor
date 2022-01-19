@@ -1,27 +1,32 @@
-﻿<div class="@Class book m-auto">
-    <div class="m-auto text-center text">
-        @ChildContent
+﻿<a href="archive/@Class">
+    <div class="@Class book m-auto">
+        <div class="m-auto text-center text">
+            @ChildContent
+        </div>
+
     </div>
-
-</div>
-
+</a>
 <style>
     .book{
         height:300px;
         width:13vw;
-        background-color:blue;
+        /*background-color:blue;*/
+        background-image:url("purpleGradLogoDiamonds.png");
         display: flex;
         justify-content: center;
         align-items: center;
     }
    .text{
-        white-space:nowrap;
+        /*white-space:nowrap;*/
+        word-break:break-word;
         color:white;
-        transform:rotate(90deg);
+        /*transform:rotate(90deg);*/
         position: relative;
-        right: 8px;
+        /*right: 8px;*/
    }
-    
+    a:link {
+        text-decoration: none;
+    }
 </style>
 
 @code{
