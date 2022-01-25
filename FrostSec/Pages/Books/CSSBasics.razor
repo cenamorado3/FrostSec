@@ -1,0 +1,101 @@
+﻿@page "/archive/CSSBasics"
+
+<PageTitle>HTML Basics</PageTitle>
+
+<FrostCollapse Title="Introduction">
+   <p class="frost-text-wrap ">
+       Cascading Style Sheets or CSS, because we all love acronyms, is how we style our HTML. This can be done a few different ways and with the current state of techlogy, 
+       A simple style tag should generally do the trick, as long as it's within an htmlcss file, though your mileage may vary.
+       At this point, I'm starting to hope you read the HTML Basics section...<br />
+       Remember those content dividers and the class and id features I introduced you too? That's what we use to style them. Let me show you how!
+    </p> 
+
+</FrostCollapse>
+
+
+<FrostCollapse Title="Basics">
+   <p class="frost-text-wrap ">
+       Let's take a code first approach this time.
+    </p> 
+    <pre>
+      <code>
+          &ltdiv class="parent"&gt
+            &ltdiv class="child1" id="boy"&gt&lt/div&gt
+            &ltdiv class="child1" id="girl"&gt&lt/div&gt
+            &ltdiv class="child1"&gt
+                &ltdiv class="grandchild1"&gt&lt/div&gt
+            &lt/div&gt
+          &lt/div&gt
+
+          &ltstyle&gt
+             .parent{
+                background-color: purple;
+                width:4rem;
+            }
+            .grandchild{
+                background-color: gray;
+                width:2rem;
+                height:2rem;
+            }
+            .child1{
+                background-color:green;
+                width:3rem;
+                height:2rem;
+            }
+            #boy{
+                background-color: blue;
+                width:2rem;
+                height:2rem;
+            }
+            #girl{
+                background-color: pink;
+                width:2rem;
+                height:2rem;
+            }
+          &lt/style&gt
+      </code>
+  </pre>
+
+  <p>
+So we have a bit of HTML that may seem familiar, the only major difference is now their is a style tag that I'll be going over.<br />
+The first thing we see in the style tag is .parent, the important note to take away right now is that we use '.' to reference a class, with .grandchild and child1 reinforcing the idea.<br />
+Next we see #boy and #girl, '#'' is used to reference an id, much like '.' for a class.<br />
+Pretty self explanatory examples, all we are doing is setting a few background colors and setting their dimensions!<br />
+And here is how it looks! Notice how the gray "grandchild" element is overlapping it's parent "child" element with all of those overlapping the "parent" element? That's the importantance of divs. There are plenty of other fun things you could do to style things different, give it a google and see what you can find!
+        <div class="parent">
+            <div class="child1" id="boy"></div>
+            <div class="child1" id="girl"></div>
+            <div class="child1">
+                <div class="grandchild"></div>
+            </div>
+        </div>
+</p>
+
+</FrostCollapse>
+
+<style>
+    .parent{
+        background-color: purple;
+        width:4rem;
+    }
+    .grandchild{
+        background-color: gray;
+        width:2rem;
+        height:2rem;
+    }
+    .child1{
+        background-color:green;
+        width:3em;
+        height:2rem;
+    }
+    #boy{
+        background-color: blue;
+        width:2rem;
+        height:2rem;
+    }
+    #girl{
+        background-color: pink;
+        width:2rem;
+        height:2rem;
+    }
+</style>

@@ -1,0 +1,111 @@
+﻿@page "/archive/Bootstrap101"
+
+<PageTitle>Bootstrap 101</PageTitle>
+
+<FrostCollapse Title="History">
+   <p class="frost-text-wrap">
+       Back in 90s and early 2000s, we did things the way I discussed in the CSS Basics section, the internet was young, dial up still existed, which you may or may not remember, and if I am really lucky, 
+       you will remember, or at least take up a trip down nostalgia lane and check out what Yahoo, AOL, and Ask Jeeves looked like. To add even more weight, software like PhotoShop and Illustrator were not
+       as available to the general public, nor were the skills to make graphics, leaving most web pages looking like a decent game of Tetris. Web design consisted of shifting content dividers 5 pixels to right,
+       then deciding, maybe 4pixels looked a little better if we made the square a few pixels smalles and shifted it up 2 pixels.
+       <br />
+       <br />
+       That is until around 2011, where some of the folks at Twitter had enough of doing like it was the 90s. They worked smarter not harder. You may have been a freshmen in highschool or college at that time.
+       As you might imagine, this was not something that was not taught in schools at the time, now adays any bootcamp program will teach you that, but <a href="https://getbootstrap.com/">these folks</a> 
+       will be be there for you time and time again.
+        <br />
+       <br />
+       Now it's time to pull yourself up by the bootstrap.
+    </p> 
+</FrostCollapse>
+
+
+<FrostCollapse Title="Examples">
+<p class="frost-text-wrap">
+    This time there will be more words and examples than code, as this is more of an art than cold logic. Time for a breakdown!
+    </p> 
+    <FrostCollapse Title="Welcome to the Grid">
+            <p class="frost-text-wrap">
+                You'll see these examples everywhere once you start. They lean heavily on long standing design principles, if you've ever used InDesign or looked at a magazine you'll understand this, heck, even
+                many roads are designed this way!
+
+            <div class="parent flex-container m-auto">
+                <div class="row">
+                    <div class="child1 m-1" id="boy"></div>
+                    <div class="child1 m-1" id="girl"></div>
+                </div>
+                <div class="row">
+                    <div class="child1  m-1"></div>
+                    <div class="grandchild  m-1" ></div>
+                </div>
+            </div>
+
+            You may recognize these little boxes and colors but realize they've taken a new shape, with some clever useage of divs and bootstrap, thanks to Twitter, we can now easily throw something like this
+            together on the fly.
+            <br />
+            <br />
+            Based on human psychology, we know people tend to read left to right, at least in the west! By giving things space to breath, be it through clever punctuation, or intersections, called gutters or alleys in design. We can 
+            clearly optimize what we see for the human mind. By applying those design principles, along with simple patters we can intuitively pick up on, be it through color or structure. Much like that way a
+            chef plates their food, we can serve data in way that is easily digestible and recognizable, you may even be thinking about the Window's logo right now! Now let's get you some code.
+        </p> 
+    </FrostCollapse>
+    <FrostCollapse Title="The Breakdown">
+            <pre>
+                <code>
+                &ltdiv class="parent flex-container m-auto"&gt
+                    &ltdiv class="row"&gt
+                        &ltdiv class="child1 m-1" id="boy"&gt&lt/div&gt
+                        &ltdiv class="child1 m-1" id="girl"&gt&lt/div&gt
+                    &lt/div&gt
+                    &ltdiv class="row"&gt
+                        &ltdiv class="child1  m-1"&gt&lt/div&gt
+                        &ltdiv class="grandchild  m-1" &gt&lt/div&gt
+                    &lt/div&gt
+                &lt/div&gt
+                </code>
+            </pre>
+            <p>
+                Keeping that last example in mind, let me explain those design principles and how they relate to BootStrap.
+                <br />
+                Containers act like divs, but rather than affecting the raw HTML, they add the flavor. There are a few types in BootStrap such as, container, flex-container, and fluid containers, each serving a different purpose.
+                <br />
+                Within containers we have rows, which in turn contain columns, creating the gutters.
+                When you put them all together, you have an incredible tool to easily snap elemnts to a grid, while still giving you full control of each individual
+                element. It's up to you how you organize it. The more organized it is, the more flexible it becomes, ending in a stable product that is more likely to bend than break under stress. 
+                <br />
+                <br />
+                There is still so much more that can be said and taught. I've only shown you the fundamentals, take a look around and think about how I may have built things here with what I've shown or anywhere else, every single
+                web page uses HTML and CSS, and I can't imagine one that doesn't use BootStrap or some CSS implementaion like BootStrap. Hit F12 on the keyboard, take look at all the raw code, mess around with the classes and don't forget to have fun and don't forget to Google it!
+            </p>
+    </FrostCollapse>
+</FrostCollapse>
+
+
+
+<style>
+    .parent{
+        background-color: purple;
+        width:5rem;
+        height:5rem;
+    }
+    .grandchild{
+        background-color: gray;
+        width:2rem;
+        height:2rem;
+    }
+    .child1{
+        background-color:green;
+        width:2em;
+        height:2rem;
+    }
+    #boy{
+        background-color: blue;
+        width:2rem;
+        height:2rem;
+    }
+    #girl{
+        background-color: pink;
+        width:2rem;
+        height:2rem;
+    }
+</style>

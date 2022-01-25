@@ -1,6 +1,6 @@
 ﻿<a href="archive/@Book.Title.Replace(" ", "")">
     <div class="@Book.CSSClass book m-auto">
-        <div class="m-auto text-center text">
+        <div class="m-auto text-center frost-text-wrap">
             @ChildContent
         </div>
 
@@ -10,15 +10,12 @@
     .book{
         height:300px;
         width:13vw;
-        /*background-color:blue;*/
         background-image:url("purpleGradLogoDiamonds.png");
         display: flex;
         justify-content: center;
         align-items: center;
     }
    .text{
-        /*white-space:nowrap;*/
-        word-break:break-word;
         color:white;
         /*transform:rotate(90deg);*/
         position: relative;
@@ -31,5 +28,5 @@
 
 @code{
     [Parameter]public RenderFragment? ChildContent{ get; set; }
-    [Parameter]public Book? Book{ get; set; }
+    [Parameter]public Book Book{ get; set; }
 }

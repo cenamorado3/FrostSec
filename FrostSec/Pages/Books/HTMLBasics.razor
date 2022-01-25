@@ -1,0 +1,78 @@
+﻿@page "/archive/HTMLBasics"
+
+<PageTitle>HTML Basics</PageTitle>
+
+<FrostCollapse Title="Introduction">
+   <p class="frost-text-wrap ">HTML is one of few languages that I used growing up that I still use often today, it is the foundation of most things we see today, Googling will always provide more information than
+    I could ever cover myself, in the spirit of sharing my knowledge through my platform. I'll start with some basics. HTML is an acronym standing for Hyper Text Markup Language and like any
+    markup language, they use what are refered to as tags to structure code in to a tree of hierarchy. Below is an example in a very pure form of a markup hierachy tree.
+    </p> 
+    <pre>
+      <code>
+          &ltalphabet&gt
+            &lta&gt&lt/a&gt
+            &ltb&gt&lt/b&gt
+            &ltc&gt&lt/c&gt
+            ...
+          &lt/alphabet&gt
+      </code>
+  </pre>
+  <p>Before I get ahead of myself, let me explain what a tag is. A tag is simply anything enclosed in &lt&gt.<br />
+    As we can see, we opened an "alphabet", inside this "alphabet" tag, we opened and closed a, b, and c tags in a single line, before closing the alphabet tag. Since all the letters open and close 
+    within the alphabet tag, we would say they are children of the parent alphabet tag, thus forming a hierarchy. 
+    </p>
+</FrostCollapse>
+
+
+<FrostCollapse Title="Basics">
+   <p class="frost-text-wrap ">
+       There are plenty of places to really dig in and learn all the frequently used tags that native to HTML, so I'll just introduce you to your best friends, the div tag.<br />
+       A div tag, short for content division, as the name suggest, is used to divide content, this helps us give us cut our HTML into manageable pieces before we spice them up with CSS.
+    </p> 
+    <pre>
+      <code>
+          &ltdiv class="parent" id="example"&gt
+            &ltdiv class="child1"&gt&lt/div&gt
+            &ltdiv class="child1"&gt&lt/div&gt
+            &ltdiv class="child1"&gt
+                &ltdiv class="grandchild1"&gt&lt/div&gt
+            &lt/div&gt
+        &lt/parent&gt
+      </code>
+  </pre>
+
+  <p>
+      You may have noticed the above example now have classes or an id, most tags support both of these features, but they are best friends with the div tag. Ultimately this is what we use to style things. For example, if we a parent wanted
+      their children to wear matching outfits, now that can be done! Which is something I know you've seen and something I absolutely did! Much like the family example here, where there are 
+      parents, children with siblings, and some who have their own children. All of which have a few common ancestors.
+
+  </p>
+</FrostCollapse>
+
+<FrostCollapse Title="Ancestors">
+   <p class="frost-text-wrap ">
+      Ancestors will be the last bit I touch on mark up languages for a brief introduction. These are things all HTML pages of common at the very least, these are roots an HTML tree.
+    </p> 
+    <pre>
+      <code>
+          &lthtml&gt
+            &lthead&gt
+                &lttitle&gt&lt/title&gt
+            &lt/head&gt
+            &ltbody&gt&lt/body&gt
+          &lt/html&gt
+      </code>
+  </pre>
+  <p>
+      The html tag is how we know we are working with html.<br />
+      The head tag conatins meta data, this can included links or references to scripts, stylesheets, the required title tag, among many other things.<br />
+      Lastly, the body, which is contains everything we will see on any page at any given time.
+
+      <br />
+      <br />
+      If you're interested in learning more about HTML now, I suggest heading over to <a href="https://www.w3schools.com/">w3schools</a>.
+      <br />
+      <a href="/archive/CSSBasics">Otherwise you can learn a bit about CSS on my site!</a>
+  </p>
+
+</FrostCollapse>

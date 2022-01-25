@@ -1,17 +1,10 @@
 ﻿@media (max-width: 500px) {
-    .AzureDeployment {
-        background-color: darkgreen;
-    }
-
-    .ShelfComp {
-        background-color: darkcyan;
-    }
-
-    .a {
-        background-color: violet;
-    }
-
-    .b {
-        background-color: orchid;
+    .book {
+        height: 300px;
+        width: 13vw;
+        background-image: url("purpleGradLogoDiamonds.png");
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

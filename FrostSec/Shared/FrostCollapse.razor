@@ -1,0 +1,66 @@
+﻿@if(!_collapse)
+{
+<div class="frost-collapse p-4 m-auto">
+    <div class=" flex-container">
+        <div class="row w-100" @onclick="Collapse">
+            <div class="col-6">
+                 <h3>@Title</h3>
+            </div>
+            <div class="col-6 oi">
+                <div class="oi-lock-unlocked chevron-float-right"></div>
+            </div>
+        </div>
+
+        <div class="row m-4 frost-text-wrap">
+            @ChildContent
+        </div>
+    </div>
+ </div>
+}
+
+@if(_collapse)
+{
+<div class="frost-collapse p-4 m-auto">
+    <div class=" flex-container">
+        <div class="row w-100" @onclick="Collapse">
+            <div class="col-6">
+                <h3>@Title</h3>
+            </div>
+            <div class="col-6 oi">
+                <div class="oi-lock-locked chevron-float-right"></div>
+            </div>
+        </div>
+    </div>
+ </div>
+}
+
+
+
+<style>
+    p{
+        color:black;
+    }
+    .frost-collapse{
+        color:black;
+    }
+    .chevron-float-right{
+        float: right;
+        position:relative;
+        top:7px;
+    }
+
+</style>
+
+@code {
+
+    [Parameter]public RenderFragment? ChildContent{ get; set; }
+    [Parameter]public string Title{ get; set; }
+
+
+    private bool _collapse = true;
+
+    private void Collapse()
+    {
+        _collapse = !_collapse;
+    }
+}
