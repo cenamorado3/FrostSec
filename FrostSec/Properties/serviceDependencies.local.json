@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "signalr1": {
+      "secretStore": "LocalSecretsFile",
+      "type": "signalr.azure",
+      "connectionId": "Azure:SignalR:ConnectionString"
+    }
+  }
+}

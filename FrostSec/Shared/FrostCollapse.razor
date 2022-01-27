@@ -37,11 +37,8 @@
 
 
 <style>
-    p{
-        color:black;
-    }
     .frost-collapse{
-        color:black;
+       color:#462f65;
     }
     .chevron-float-right{
         float: right;
@@ -54,7 +51,7 @@
 @code {
 
     [Parameter]public RenderFragment? ChildContent{ get; set; }
-    [Parameter]public string Title{ get; set; }
+    [Parameter]public string? Title{ get; set; }
 
 
     private bool _collapse = true;

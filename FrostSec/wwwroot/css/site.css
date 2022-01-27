@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
 }
 
 h1:focus {
@@ -66,6 +66,36 @@ a, .btn-link {
 
 
   /*Custom classes below*/
-.text-wrap {
-    word-break: break-all
+p {
+    font-family: Ubuntu-Regular;
+    
+}
+
+h1 {
+    font-family: Ubuntu-Bold;
+}
+
+h2 h3 h4 h4 {
+    font-family: Ubuntu-Medium;
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "Ubuntu-Regular";
+    src: url("/Fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "Ubuntu-Bold";
+    src: url("/Fonts/Ubuntu/Ubuntu-Bold.ttf");
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "Ubuntu-Medium";
+    src: url("/Fonts/Ubuntu/Ubuntu-Medium.ttf");
 }

@@ -1,0 +1,149 @@
+﻿@page "/archive/BuildingTheBookComponent"
+
+<PageTitle>Building The Book Component</PageTitle>
+
+<FrostCollapse Title="Building The Book Class">
+    <p>
+        Now that we've covered a few of the basics, lets apply that to a modern framework to create reusable components. I'll stick to a Full Microsoft, so we'll be looking at Razor 
+        pages with C#. So let's start with a quick run through C#. Let's take it from the top.
+        <FrostCollapse Title="The Code">
+        <pre>
+            <code>
+                namespace FrostSec.Data
+                {
+                    public class Book : Disposer, IShelfComponent
+                    {
+                        public string? CSSClass { get; set; }
+                        public string? Title { get; set; }
+
+                        protected override void Dispose(bool _disposing)
+                        {
+                            if (!IsDisposed)
+                            {
+                                if (_disposing)
+                                {
+                                    CSSClass = null;
+                                    Title = null;
+                                }
+                            }
+                            IsDisposed = true;
+                        }
+        
+ 
+                        ~Book()
+                        {
+                            CSSClass = null;
+                            Title = null;
+                            IsDisposed = true;
+                        }
+                    }
+
+                    public interface IShelfComponent 
+                    { 
+                        public string? CSSClass { get; set; }
+                        public string? Title { get; set; }
+                    }
+
+                    public abstract class Disposer : IDisposable
+                    {
+                        public bool IsDisposed { get; set; }
+                        public void Dispose()
+                        {
+                            Dispose(true);
+                            GC.SuppressFinalize(this);
+                        }
+        
+                        protected virtual void Dispose(bool disposing)
+                        {
+                            if (!IsDisposed)
+                            {
+                                if (disposing)
+                                {
+                                    //please override and wipe your objects memory
+                                }
+
+                                IsDisposed = true;
+                            }
+                        }
+                    }
+                }
+
+                }
+            </code>
+        </pre>
+        </FrostCollapse>
+
+
+       
+        <FrostCollapse Title="The Book Class">
+        We're immediately greeted with the namespace, a namespace. For the sake of simplicty, I want you to imagine it's a div. It creates of a division from other namespaces, which
+        we will be calling encapsulation.<br />
+        Within this namespace, we've encapsulated a class, interface, and abstract class. I want you think of these, as divs, as well. A class with context, being in C#, are called objects.
+        You could argue it's not "truly" an object, as it is not new, yet, in the future, it will be. <br />
+       • Two auto implemented properties. Properties allow us to get and set data values. In this case, they MUST be there due to the inhertiance being covered later.<br />
+       • A method, which you shall not worry about just yet, just know it's doing a bit of memory handling.<br />
+       • Lastly, a finanlizer, same deal as above.
+        </FrostCollapse>
+
+
+        <FrostCollapse Title="The IShelfComponent Interface">
+        Next we have an interface which abstracts the book. Much like Plato's Theory of Forms asserts the tangible realm is not real. By using ':' we can inherit or extend the class.
+        By doing do, we've articulated that book is not truly a book, but merely an IShelfComponent, now we can broadly state it's something that goes
+        on a shelf. Which has two properties, CSSClass and Title. Because an interface states it contains them, anything that inherits from them MUST also have them.
+        </FrostCollapse>
+
+        <FrostCollapse Title="The Disposer Abstract Class">
+        Last but not least, the Disposer abstract class, these serve the same purpose as interfaces with some caveats. Interfaces can not contain implementation, 
+        abstract classes can, for that reason, as long the abstract class in question provides the implementation, the child classes are not required to implement it.
+        <br />
+        </FrostCollapse>
+        Circling back to the book for one last sanity check. Book : Disposer, IShelfComponent. The Book inherits both the Disposer abstract class, and IShelfComponent interface. Making 
+        it something that goes on a shelf, that will eventually be thrown out, could be anything at this point right?
+
+    </p> 
+</FrostCollapse>
+<FrostCollapse Title="Building The Book Component">
+         <pre>
+             <code>
+                 &lta href="archive/&#64Component.Title.Replace(" ", "")"&gt
+                    &ltdiv class="&#64Component.CSSClass book m-auto"&gt
+                        &ltdiv class="m-auto text-center frost-text-wrap"&gt
+                            &#64ChildContent
+                        &lt/div&gt
+
+                    &lt/div&gt
+                &lt/a&gt
+                &ltstyle&gt
+                    .book{
+                        height:300px;
+                        width:13vw;
+                        background-image:url("purpleGradLogoDiamonds.png");
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .text{
+                        color:white;
+                        /*transform:rotate(90deg);*/
+                        position: relative;
+                        /*right: 8px;*/
+                    }
+                    a:link {
+                        text-decoration: none;
+                    }
+                &lt/style&gt
+
+                &#64code{
+                    [Parameter]public RenderFragment? ChildContent{ get; set; }
+                    [Parameter]public IShelfComponent? Component{ get; set; }
+                }
+             </code>
+         </pre>
+
+        <p>
+            I've lightly touched on HTML, CSS, and BootStrap, so let's stick to the top of Books/IShelfComponent.<br />
+            Notice the first lines calling &#64Component and the last line mentioning it. In .Net Razor, we can tag public properties with the [Parameter] attribute.
+            This let's the component accept an object of the declared type, being an IShelfComponent, the interface explained earlier. Which it then uses when &#64Component.
+            In other words, even though this component is implementing how it will be rendered on the browser, it has no idea exactly what. Huh? Exactly!<br />
+        </p>
+</FrostCollapse>

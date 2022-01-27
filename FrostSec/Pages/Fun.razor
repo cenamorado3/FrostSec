@@ -1,7 +1,7 @@
-﻿@page "/fun"
+﻿@page "/archive"
 <PageTitle>Fun</PageTitle>
-<ShelfComponent Books=@shelf1></ShelfComponent>
-<ShelfComponent Books=@shelf2></ShelfComponent>
+<ShelfComponent Components=@shelf1></ShelfComponent>
+<ShelfComponent Components=@shelf2></ShelfComponent>
 
 
 <style>
@@ -17,7 +17,7 @@
 
 </style>
 @code {
-    private List<Book> shelf1 = new List<Book>()
+    private List<IShelfComponent> shelf1 = new List<IShelfComponent>()
     {
         new Book()
         {
@@ -45,7 +45,7 @@
             Title = "All together"
         }
     };
-    private List<Book> shelf2 = new List<Book>()
+    private List<IShelfComponent> shelf2 = new List<IShelfComponent>()
     {
         new Book()
         {

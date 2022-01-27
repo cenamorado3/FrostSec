@@ -14,12 +14,16 @@
   "profiles": {
     "WSL": {
       "commandName": "WSL2",
-      "distributionName": ""
+      "distributionName": "",
+      "environmentVariables": {
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.Azure.SignalR"
+      }
     },
     "FrostSec": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.Azure.SignalR"
       },
       "applicationUrl": "https://localhost:7130;http://localhost:5130"
     }

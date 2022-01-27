@@ -1,7 +1,7 @@
-﻿<a href="archive/@Book.Title.Replace(" ", "")">
-    <div class="@Book.CSSClass book m-auto">
+﻿<a href="archive/@Component.Title.Replace(" ", "")">
+    <div class="@Component.CSSClass book m-auto">
         <div class="m-auto text-center frost-text-wrap">
-            @ChildContent
+            <h5 class="frost-text-wrap">@Component.Title</h5>
         </div>
 
     </div>
@@ -27,6 +27,5 @@
 </style>
 
 @code{
-    [Parameter]public RenderFragment? ChildContent{ get; set; }
-    [Parameter]public Book Book{ get; set; }
+    [Parameter]public IShelfComponent? Component{ get; set; }
 }
