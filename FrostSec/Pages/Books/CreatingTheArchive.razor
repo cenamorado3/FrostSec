@@ -1,0 +1,75 @@
+﻿@page "/archive/CreatingtheArchive"
+
+<PageTitle>Creating the Archive</PageTitle>
+<FrostCollapse Title="The Archive">
+    I'm just going to be transperent and show you the code to "Fun" page you were just on. The C# portion is straightforward, instanstiating everything in place, though due to
+    that simplicity, it would be equally simple to build persistence in with a database, even manage them via the web page rather than through the database. That's all there is to it.
+<pre>
+    <code>
+        @@page "/archive"
+        &ltPageTitle&gtFun&lt/PageTitle&gt
+        &ltShelfComponent Components=@@shelf1&gt&lt/ShelfComponent&gt
+        &ltShelfComponent Components=@@shelf2&gt&lt/ShelfComponent&gt
+
+        @@code {
+        private List&ltIShelfComponent&gt shelf1 = new List&ltIShelfComponent&gt()
+        {
+            new Book()
+            {
+                CSSClass = "AzureDeployment", 
+                Title = "Deploying To Azure"
+            },
+            new Book()
+            {
+                CSSClass = "BookComp", 
+                Title = "Building the Book Component"
+            },
+            new Book()
+            {
+                CSSClass = "ShelfComp", 
+                Title = "Building the Shelf Component"
+            },
+            new Book()
+            {
+                CSSClass = "Archive", 
+                Title = "Creating the Archive"
+            },
+            new Book()
+            {
+                CSSClass = "Fun", 
+                Title = "All together"
+            }
+        };
+        private List&ltIShelfComponent&gt shelf2 = new List&ltIShelfComponent&gt()
+        {
+            new Book()
+            {
+                CSSClass = "HTMLBasics", 
+                Title = "HTML Basics"
+            },
+            new Book()
+            {
+                CSSClass = "HTMLBasics", 
+                Title = "HTML Basics"
+            },
+            new Book()
+            {
+                CSSClass = "ShelfComp", 
+                Title = "Bootstrap 101"
+            },
+            new Book()
+            {
+                CSSClass = "Archive", 
+                Title = "SSL Certification"
+            },
+            new Book()
+            {
+                CSSClass = "Fun", 
+                Title = "Domains"
+            }
+        };
+}
+
+    </code>
+</pre>
+</FrostCollapse>

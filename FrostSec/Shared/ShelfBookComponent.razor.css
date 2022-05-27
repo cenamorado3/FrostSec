@@ -8,7 +8,8 @@
         align-items: center;
     }
     .frost-text-wrap {
-        transform: rotate(90deg);
+        /* i dont know why 45deg....but 45deg? */
+        transform: rotate(45deg);
         white-space: nowrap;
     }
 

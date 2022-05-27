@@ -1,0 +1,73 @@
+﻿@page "/archive/BuildingTheShelfComponent"
+
+<PageTitle>Building The Shelf Component</PageTitle>
+
+<FrostCollapse Title="Building The Shelf Component">
+    <p>
+        This will be far simpler than the Book itself. Which makes sense when you think about it. A shelf just holds something, there isn't a whole a lot of 
+        information on the shelf. The Books themselves hold all the information. That's the power of components, we can just reuse them! With that, the 
+        ball is rolling and development becomes increasily faster and easier to understand.
+    </p>
+
+    <pre>
+        <code>
+            &ltdiv class="shelf m-auto"&gt
+                &ltdiv class="flex-container m-auto"&gt
+                    &ltdiv class="row mt-4"&gt
+                        &#64foreach(IShelfComponent component in Components)
+                        {
+                            &ltdiv class="col-2 m-auto"&gt
+                                &ltShelfBookComponent Component="&#64component"/&gt
+                            &lt/div&gt
+                        }
+                    &lt/div&gt
+                &lt/div&gt
+             &lt/div&gt
+            &ltstyle&gt
+                .shelf{
+                    height:100%;
+                    width:75%;
+                }
+                h5{
+                    color:white;
+                }
+            &lt/style&gt
+
+            &#64code{
+                [Parameter]public List&ltIShelfComponent&gt? Components{ get; set; }
+            }
+        </code>
+    </pre>
+
+    I'd like to believe we can skip the first four lines. We discussed BootStrap earlier, all this is doing is setting up the grid, a simple container with one row.
+    The nifty bit here is the "@@foreach(IShelfComponent component in Components)." Skip to the end of example code, you see this takes a List of type IShelfComponent,
+    which we iterate over in the foreach loop. Effictively reducing the total amount of code, it's only 3 lines of code, multiply that by the length of list, in my case I know that is 5,
+    we have 15 lines of code. A small difference but the principal of the matter is, without the BookComponent, we could tack on an extra 31 lines. Effectively, we've redued 165 lines down
+    to 6 lines code.
+<br />
+    All that remains is the style. Simple setting of dimension and text color. As a bonus, I'll ask you to check out the mobile version, in return I'll provide the mobile specific CSS.
+
+    <pre>
+        <code>
+            @@media (max-width: 500px) {
+    .book {
+        height: 300px;
+        width: 13vw;
+        background-image: url("purpleGradLogoDiamonds.png");
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .frost-text-wrap {
+        /* i dont know why 45deg....but 45deg? */
+        transform: rotate(45deg);
+        white-space: nowrap;
+    }
+            }
+        </code>
+    </pre>
+    I won't fully cover what it is doing, I'll let you explore that on your own since the path is well lit. What I will explain is th "@@media (max-width: 500px)", we call this a 
+    media query. This allows us to know what the size of the screen is, truthfully this is a rather crude one size fits all solution, it is not a tailored fit. As long as the max width 
+    is less than 500px in this specific case, we will switch how the Shelf Components are displayed. It isn't much, but it is a nice touch. 
+</FrostCollapse>
+

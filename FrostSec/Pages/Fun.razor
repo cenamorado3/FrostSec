@@ -3,19 +3,6 @@
 <ShelfComponent Components=@shelf1></ShelfComponent>
 <ShelfComponent Components=@shelf2></ShelfComponent>
 
-
-<style>
-    .AzureDeployment{
-    }
-    .ShelfComp{
-    }
-
-    .a{
-    }
-    .b{
-    }
-
-</style>
 @code {
     private List<IShelfComponent> shelf1 = new List<IShelfComponent>()
     {
@@ -49,12 +36,12 @@
     {
         new Book()
         {
-            CSSClass = "a", 
+            CSSClass = "HTMLBasics", 
             Title = "HTML Basics"
         },
         new Book()
         {
-            CSSClass = "b", 
+            CSSClass = "CSSBasics", 
             Title = "CSS Basics"
         },
         new Book()

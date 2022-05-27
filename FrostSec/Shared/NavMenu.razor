@@ -1,35 +1,33 @@
-﻿<div class="frostsec-navbar-dark text-center">
-
-    <div class="frost-nav-item">
-        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-            <span class="oi oi-home" aria-hidden="true"></span> Home
-        </NavLink>
-    </div>
-
-    <div class="frost-nav-item">
-        <NavLink class="nav-link" href="archive" Match="NavLinkMatch.Prefix" ActiveClass="active">
-            <span class="oi oi-wrench" aria-hidden="true"></span> Fun
-        </NavLink>
-    </div>
-
-    <div class="frost-nav-item">
-        <NavLink class="nav-link" href="contactme" Match="NavLinkMatch.All">
-            <span class="oi oi-terminal" aria-hidden="true"></span> Contact Me
-        </NavLink>
+﻿<div class="frostsec-navbar text-center flex-container">
+    <div class="row frost-row m-auto">
+        <div class="frost-nav-item col m-auto">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home p-2" aria-hidden="true"/> Home
+            </NavLink>
+        </div>
+        <div class="frost-nav-item col m-auto">
+            <NavLink class="nav-link" href="archive" Match="NavLinkMatch.Prefix" ActiveClass="active">
+                <span class="oi oi-wrench p-2" aria-hidden="true"/> Fun 
+            </NavLink>
+        </div>
+        <div class="frost-nav-item col m-auto">
+            <NavLink class="nav-link" href="contactme" Match="NavLinkMatch.All">
+                <span class="oi oi-terminal p-2" aria-hidden="true"/> Contact
+            </NavLink>
+        </div>
     </div>
 </div>
 <style>
-
-    .frostsec-navbar-dark{
+    .frost-row{
+        width:25%;
+    }
+    .frostsec-navbar{
         background-color: #0197db;
-        display: block ruby;
     }
 
     .frost-nav-item[b-9eqa5kfljg] a{
         color: white;
-        border-radius: 4px;
         height: 3rem;
-        display: flex;
         align-items: center;
         line-height: 3rem;
     }
