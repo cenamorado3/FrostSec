@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "https://www.frostsec.net",
+      "applicationUrl": "https://frostsec.net",
       "sslPort": 0
     },
     "iisExpress": {
