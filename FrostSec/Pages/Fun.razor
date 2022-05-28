@@ -1,10 +1,40 @@
 ﻿@page "/archive"
 <PageTitle>Fun</PageTitle>
-<ShelfComponent Components=@shelf1></ShelfComponent>
+<ShelfComponent Components=@shelf3></ShelfComponent>
 <ShelfComponent Components=@shelf2></ShelfComponent>
+<ShelfComponent Components=@shelf1></ShelfComponent>
+
 
 @code {
-    private List<IShelfComponent> shelf1 = new List<IShelfComponent>()
+    private List<IShelfComponent> shelf3 = new List<IShelfComponent>()
+    {
+        new Book()
+        {
+            CSSClass = "Comming Soon", 
+            Title = "Comming Soon"
+        },
+        new Book()
+        {
+            CSSClass = "Comming Soon", 
+            Title = "Comming Soon"
+        },
+        new Book()
+        {
+            CSSClass = "Comming Soon", 
+            Title = "Comming Soon"
+        },
+        new Book()
+        {
+            CSSClass = "Comming Soon", 
+            Title = "Comming Soon"
+        },
+        new Book()
+        {
+            CSSClass = "Comming Soon", 
+            Title = "Comming Soon"
+        },
+    };
+    private List<IShelfComponent> shelf2 = new List<IShelfComponent>()
     {
         new Book()
         {
@@ -32,7 +62,7 @@
             Title = "All together"
         }
     };
-    private List<IShelfComponent> shelf2 = new List<IShelfComponent>()
+    private List<IShelfComponent> shelf1 = new List<IShelfComponent>()
     {
         new Book()
         {
@@ -60,4 +90,5 @@
             Title = "Domains"
         }
     };
+    
 }
