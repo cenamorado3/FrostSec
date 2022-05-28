@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSignalR().AddAzureSignalR(opt => opt.ConnectionString = "Endpoint=https://frostsecsignalr.service.signalr.net;AccessKey=XnFp/2Cm3gDhUFNVnPesdy8uBV5MtqFgNmFwpvTjDko=;Version=1.0;");
+builder.Services.AddSignalR().AddAzureSignalR();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
