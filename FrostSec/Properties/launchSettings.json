@@ -3,8 +3,11 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "https://frostsec.net",
-      "sslPort": 0
+      "applicationUrl": "https://www.frostsec.net",
+      "sslPort": 0,
+      "environmentVariables": {
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.Azure.SignalR"
+      }
     },
     "iisExpress": {
       "applicationUrl": "https://localhost:7130;http://localhost:5130",
