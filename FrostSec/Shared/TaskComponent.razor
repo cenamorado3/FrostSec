@@ -1,0 +1,35 @@
+﻿<div class="m-4" style="background-color:cornflowerblue;color:white;" 
+    draggable="true" @ondragenter="DragStartHandler" @ondragend="DragEndHandler"
+    ondragover="event.preventDefault();"
+>
+    <div title="@Task.Name" style="@Task.Style" class="text-center"> 
+        @Task.Name @Task.State {X:@Task.X, Y:@Task.Y}
+    </div>
+</div>
+
+@code{
+    [Parameter] public FrostTask Task { get; set; }
+    [Parameter] public EventCallback<string> StateChanged{ get; set; }
+    private void DragStartHandler(DragEventArgs e) 
+    {
+        Task.X = e.ClientX;
+        Task.Y = e.ClientY;
+    }
+
+    private void DragEndHandler(DragEventArgs e)
+    {
+        Task.X = e.ClientX;
+        Task.Y = e.ClientY;
+        if(Task.X > 2000)
+        {
+            Task.AdvanceState();
+        }
+        if(Task.X > 3000)
+        {
+            Task.AdvanceState();
+        }
+        StateChanged.InvokeAsync();
+    }
+
+
+}

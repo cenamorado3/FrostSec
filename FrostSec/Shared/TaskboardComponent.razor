@@ -1,0 +1,43 @@
+﻿<div class="flex-container m-auto">
+    <div class="row mt-4">
+    @foreach (string state in States)
+    {
+        <div class="col-3 m-auto" >
+            <p class="text-center ">@state</p>
+            <div style="border:2px solid black;height:200px;" class="dropzone can-drop" ondragover="event.preventDefault();">
+                @foreach (FrostTask task in tasks)
+                {
+                    if(state == task.State)
+                    {
+                        <TaskComponent Task="task" StateChanged="StateHandler"></TaskComponent>
+                    }
+                }
+            </div>
+        </div>
+    }
+     </div>
+</div>
+
+
+@code{
+    List<FrostTask> tasks = new()
+    {
+        new FrostTask
+        {
+            Name = "One"
+        },
+        new FrostTask
+        {
+            Name = "Two",
+        },
+        new FrostTask
+        {
+            Name = "Three",
+        },
+    };
+    List<string> States = new() { "ToDo", "Started", "Completed"};
+    private void StateHandler(string state)
+    {
+        StateHasChanged();
+    }
+}
