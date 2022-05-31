@@ -22,5 +22,17 @@
                 Style = "";
             }
         }
+        public void RegressState()
+        {
+            int prevStateIndex = States.IndexOf(State) - 1;
+            if (prevStateIndex >= 0)
+            {
+                string nextState = States[prevStateIndex];
+                State = nextState;
+                //X = 0;
+                //Y = 0;
+                Style = "";
+            }
+        }
     }
 }

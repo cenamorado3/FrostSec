@@ -1,33 +1,90 @@
-﻿<div class="m-4" style="background-color:cornflowerblue;color:white;" 
-    draggable="true" @ondragenter="DragStartHandler" @ondragend="DragEndHandler"
-    ondragover="event.preventDefault();"
+﻿@inject IJSRuntime js
+
+<div class="m-4" style="background-color:cornflowerblue;color:white;cursor:pointer" 
+draggable="true" @ondragenter="DragStartHandler" @ondragend="DragEndHandler"
+ondragover="event.preventDefault();"
+data-toggle="modal" data-target="#frost-modal"
+@onclick="ToggleEdit"
 >
     <div title="@Task.Name" style="@Task.Style" class="text-center"> 
         @Task.Name @Task.State {X:@Task.X, Y:@Task.Y}
     </div>
 </div>
+@if(edit)
+{
+<div class="modal fade show" id="modal" style="display:block; background-color: rgba(10,10,10,.8);"
+     aria-modal="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <select @bind="_state">
+                    @foreach(string opt in Task.States)
+                    {
+                        <option>@opt</option>        
+                    }
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button @onclick="Save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
 
 @code{
     [Parameter] public FrostTask Task { get; set; }
     [Parameter] public EventCallback<string> StateChanged{ get; set; }
+
+    private bool edit = false;
+    private string _state = "ToDo";
+
+    private void ToggleEdit()
+    {
+        edit = !edit;
+    }
+    private void Save()
+    {
+        Task.State = _state;
+        ToggleEdit();
+        StateChanged.InvokeAsync();
+    }
+
     private void DragStartHandler(DragEventArgs e) 
     {
-        Task.X = e.ClientX;
-        Task.Y = e.ClientY;
+  
     }
 
     private void DragEndHandler(DragEventArgs e)
     {
+        //backward
+        if(Task.X < 2499 )
+        {
+            Task.RegressState();
+        }
+        if(Task.X < 3000)
+        {
+            Task.RegressState();
+        }
+        if(Task.X < 3200)
+        {
+            Task.RegressState();
+        }
         Task.X = e.ClientX;
         Task.Y = e.ClientY;
-        if(Task.X > 2000)
+        //forward
+        if(Task.X > 2500)
         {
             Task.AdvanceState();
         }
-        if(Task.X > 3000)
+        if(Task.X > 3200)
         {
             Task.AdvanceState();
         }
+
+
         StateChanged.InvokeAsync();
     }
 
