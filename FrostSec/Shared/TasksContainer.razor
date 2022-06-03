@@ -1,0 +1,44 @@
+﻿@inject TasksCapacitor tc
+
+<div style="@_active" class="dropzone can-drop @State task-container" @ondragover="HandleDragOver" @ondragleave="HandleDragLeave" @ondrop="HandleDrop">
+    @ChildContent
+</div>
+
+@code{
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public EventCallback<string> StateChanged{ get; set; }
+    [Parameter] public string State { get; set; }
+
+    FrostTask? _movingTask = null;
+    private string _active = "border:2px solid black;height:200px;";
+
+    private void HandleDragOver(MouseEventArgs e)
+    {
+        if(!tc.Tasks.Any(t => t.IsDragging)) //if none are moving, do nothing.
+        {
+            return;
+        }
+        _movingTask = tc.Tasks.Where(t => t.IsDragging).First();
+        if(_movingTask.State != State)
+        {
+            _active = "border:2px dashed green;height:200px;";
+        }
+        if(_movingTask.State == State)
+        {
+            _active = "border:2px dashed red;height:200px;"; 
+        }
+    }
+    private void HandleDragLeave(MouseEventArgs e)
+    {
+        _active = "border:2px solid black;height:200px;";
+    }
+
+    private void HandleDrop(MouseEventArgs e)
+    {
+        _movingTask.State = State;
+        _movingTask.IsDragging = false; //we are working with a copy since we do not have direct access to the task from the container, if we do not set the values on the copy, there will be multiple that "are dragging"
+        tc.SaveTaskChanges(_movingTask);
+        _movingTask = null;
+        _active = "border:2px solid black;height:200px;";
+    }
+}

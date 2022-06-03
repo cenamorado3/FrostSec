@@ -1,43 +1,45 @@
-﻿<div class="flex-container m-auto">
+﻿@inject TasksCapacitor tc
+@implements IDisposable
+
+<div class="flex-container m-auto">
     <div class="row mt-4">
-    @foreach (string state in States)
+    @foreach (string state in tc.States)
     {
-        <div class="col-3 m-auto" >
+        <div class="col-3 m-auto" ondragover="event.preventDefault();">
             <p class="text-center ">@state</p>
-            <div style="border:2px solid black;height:200px;" class="dropzone can-drop" ondragover="event.preventDefault();">
-                @foreach (FrostTask task in tasks)
+            <TasksContainer State="@state" StateChanged="StateHandler">
+                @foreach (FrostTask task in tc.Tasks)
                 {
                     if(state == task.State)
                     {
                         <TaskComponent Task="task" StateChanged="StateHandler"></TaskComponent>
                     }
                 }
-            </div>
+            </TasksContainer>
         </div>
     }
      </div>
 </div>
 
 
+
 @code{
-    List<FrostTask> tasks = new()
+    protected override Task OnInitializedAsync()
     {
-        new FrostTask
-        {
-            Name = "One"
-        },
-        new FrostTask
-        {
-            Name = "Two",
-        },
-        new FrostTask
-        {
-            Name = "Three",
-        },
-    };
-    List<string> States = new() { "ToDo", "Started", "Completed"};
+        tc.OnChange += StateHasChanged;
+        return base.OnInitializedAsync();
+    }
+    /// <summary>
+    /// Used by the TaskComponenet or any componenet which has DIRECT access to the respective task.
+    /// </summary>
+    /// <param name="state"></param>
     private void StateHandler(string state)
     {
         StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        tc.OnChange -= StateHasChanged;
     }
 }
