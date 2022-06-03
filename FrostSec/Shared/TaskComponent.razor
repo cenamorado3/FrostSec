@@ -35,7 +35,6 @@ data-toggle="modal" data-target="#frost-modal"
 
 @code{
     [Parameter] public FrostTask Task { get; set; }
-    [Parameter] public EventCallback<string> StateChanged{ get; set; }
 
     private bool edit = false;
     private string _state = "";
@@ -51,7 +50,6 @@ data-toggle="modal" data-target="#frost-modal"
             tc.AlterTask(Task, _state);
         }
         ToggleEdit();
-        StateChanged.InvokeAsync();
     }
 
     private void DragStartHandler(DragEventArgs e) 
@@ -62,7 +60,6 @@ data-toggle="modal" data-target="#frost-modal"
     private void DragEndHandler(DragEventArgs e)
     {
         Task.IsDragging = false;
-        StateChanged.InvokeAsync();
     }
 
 

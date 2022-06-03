@@ -7,12 +7,12 @@
     {
         <div class="col-3 m-auto" ondragover="event.preventDefault();">
             <p class="text-center ">@state</p>
-            <TasksContainer State="@state" StateChanged="StateHandler">
+            <TasksContainer State="@state">
                 @foreach (FrostTask task in tc.Tasks)
                 {
                     if(state == task.State)
                     {
-                        <TaskComponent Task="task" StateChanged="StateHandler"></TaskComponent>
+                        <TaskComponent Task="task"></TaskComponent>
                     }
                 }
             </TasksContainer>
@@ -26,16 +26,13 @@
 @code{
     protected override Task OnInitializedAsync()
     {
-        tc.OnChange += StateHasChanged;
+        tc.OnChange += StateHandler;
         return base.OnInitializedAsync();
     }
-    /// <summary>
-    /// Used by the TaskComponenet or any componenet which has DIRECT access to the respective task.
-    /// </summary>
-    /// <param name="state"></param>
-    private void StateHandler(string state)
+
+    private async void StateHandler()
     {
-        StateHasChanged();
+        await InvokeAsync(() => StateHasChanged());
     }
 
     public void Dispose()
