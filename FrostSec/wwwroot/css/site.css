@@ -65,7 +65,7 @@ a, .btn-link {
 
 
 
-  /*Custom classes below*/
+/******************************************************************   Custom classes below   ****************************************************************************/
 p {
     font-family: Ubuntu-Regular;
     
@@ -99,3 +99,10 @@ h2 h3 h4 h4 {
     font-family: "Ubuntu-Medium";
     src: url("/Fonts/Ubuntu/Ubuntu-Medium.ttf");
 }
+q {
+    border-left: 10px solid #462f65;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+

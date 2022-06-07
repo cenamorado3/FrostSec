@@ -1,0 +1,43 @@
+﻿@page "/archive/DragAndDropBasics"
+
+<FrostCollapse Title="Drag Events In JavaScript">
+    <p>I'm gonna kick things off with an <a href="https://github.com/dotnet/aspnetcore/issues/18754">issue</a> from the official Blazor/aspnetcore GitHub.</p>
+       <q> 
+            After investigating various approaches we've decided that a general purpose drag & drop feature isn't something we can easily add to the Blazor framework due to the following issues:
+            <ul>
+            <li>There’s a vast range of possible UX designs/requirements for drag-drop including different combinations of:</li>
+                <ul>
+                    <li>Things that can be highlighted/ghosted/animated while dragging</li>
+                    <li>Rules about what can be dropped where and how to warn/animate violations</li>
+                    <li>UI experiences when dragging to the edge of scrollable regions, (e.g., speeding up the scrolling when you drag further, doing rubber-band effects)</li>
+                    <li>Interactions with keyboard support and accessibility</li>
+                </ul>
+                <li>Trying to support even 80% of requirements would be very expensive and open a long tail of support issues.</li>
+                <li>There isn’t one standard way to do it. The HTML5 drag/drop APIs are not adequate for most real-world apps (for example, they don’t work at all in iOS). There are lots of different 3rd-party libraries, all talking different opinions on what you want to customize.</li>
+         
+            </ul>
+            Fortunately, it can be relatively straightforward to solve drag/drop in a special-case way according to the needs of one specific app because you can pick out one of the many .js drag/drop libraries that happens to do things with the particular UX you want and call it via JS interop. For example, this sample uses draggable.js and JS interop to build a mobile-capable drag-drop calendar UI. We think the Blazor community is best suited to decide which approaches to drag & drop are most useful to package and share.
+
+            Since we don't plan to add this as a core feature of Blazor, I'm going to go ahead and close this issue.
+       </q>
+        <p>
+        Keep in mind that this is an effort to write everything in C# from scrach where traditionally JavaScript and recently TypeScript have been the go to languages
+        for DOM manipulation. There in lies in the challenge, which is ultimatly a simple caveat. For us to handle these drag events in C#, we must ignore the default JavaScript behavior, which does
+        not allow elements to be dropped onto another element, this is easily achieves by handling the event with <code>ondragover="event.preventDefault();"</code> and of course stating that an element is indeed draggable with <code>draggable="true"</code>. The rest can be handled
+        in C#!
+    </p> 
+</FrostCollapse>
+
+<FrostCollapse Title="Drag Events in Blazor">
+    <p>
+        With the JavaScript requirements, we can now handle dragging of items in a few different ways. I'll be covering most of them on as needed basis, the names are pretty self explantory, so I'll just leave you with a list for now.
+        <ul style="margin-left:1rem;">
+            <li>ondragover</li>
+            <li>ondragleave</li>
+            <li>ondrop</li>
+            <li>ondragenter</li>
+            <li>ondragend</li>
+        </ul>
+    </p>
+</FrostCollapse>
+

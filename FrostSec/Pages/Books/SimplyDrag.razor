@@ -1,0 +1,61 @@
+﻿@page "/archive/SimplyDrag"
+<FrostCollapse Title="More is More">
+    <div draggable="true" ondragover="event.preventDefault();" style="border:2px solid @color;height:650px;width:650px;@position"
+    @ondragstart="DragStartHandler" @ondragend="DragEndHandler"
+    >
+        <iframe class="mt-4" width="600" height="600" src="https://www.youtube-nocookie.com/embed/QHZ48AE3TOI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</FrostCollapse>
+
+<FrostCollapse Title="Just a Byte">
+    <p>
+        This is a very simple approach, which results in buggy and incomplete code. You can simply drag it aroung with absolutely no code to dictate the desired behavior, for that,
+        we will need more code! For simplicty sake, this demonstrates how easy it can be to declare events, be it a C# event as shown by <code>@@ondragstart="DragStartHandler"</code>, or JavaScript event simply as
+        <code>ondragover</code> in the HTML of a .NET Razor component and declare the respective handler methods along side it or have them in their own partial class.
+
+    </p>
+    <pre>
+        <code>
+            &ltdiv draggable="true" ondragover="event.preventDefault();" style="border:2px solid @@color;height:650px;width:650px;@@position"
+            @@ondragstart="DragStartHandler" @@ondragend="DragEndHandler"
+            &gt
+                &ltiframe class="mt-4" width="600" height="600" src="https://www.youtube-nocookie.com/embed/QHZ48AE3TOI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+                encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt&lt/iframe&gt
+        &lt/div&gt
+
+        @@code{
+            private string position = "";
+            private string color = "black";
+            private void DragStartHandler(DragEventArgs e)
+            {
+                color = "green";
+            }
+
+            private void DragEndHandler(DragEventArgs e)
+            {
+                color = "black";
+                position = $"position:absolute;left:{e.ClientX}px;top:{e.ClientY}px;";
+                StateHasChanged();
+        }
+}
+
+
+            </code>
+    </pre>
+</FrostCollapse>
+
+@code{
+    private string position = "";
+    private string color = "black";
+    private void DragStartHandler(DragEventArgs e)
+    {
+        color = "green";
+    }
+
+    private void DragEndHandler(DragEventArgs e)
+    {
+        color = "black";
+        position = $"position:absolute;left:{e.ClientX}px;top:{e.ClientY}px;";
+        StateHasChanged();
+    }
+}
