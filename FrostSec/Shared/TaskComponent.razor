@@ -1,29 +1,77 @@
 ﻿@inject IJSRuntime js
 @inject TasksCapacitor tc
-<div class="m-4" style="background-color:cornflowerblue;color:white;cursor:pointer" 
+
+<br />
+@*can add a priority css with just border left example priority high on the next line *@
+<div class="m-auto w-75 h-25 task text-center" 
 draggable="true" @ondragenter="DragStartHandler" @ondragend="DragEndHandler"
 data-toggle="modal" data-target="#frost-modal"
-@onclick="ToggleEdit"
+
 >
-    <div title="@Task.Name" class="text-center"> 
-        @Task.Name @Task.State
+    <div class="flex-container">
+        <div class="col">
+            <div class="row mt-2" title="@Task.Name"  @onclick="ToggleEdit" style="cursor:pointer;">
+                <p>
+                    @Task.Name
+                </p>
+            </div>
+
+            <div class="row"  @onclick="ToggleEdit" style="cursor:pointer;">
+                <div class="status-@Task.State w-75 m-auto">
+                    @Task.State
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-4 task-icons">
+                    <FrostCheckBox/>
+                    <img src="/favicon.png"/>
+                    2
+                </div>
+
+                <div class="col task-link">
+                    <a href="Tasks/Task-####">Task-####</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
 @if(edit)
 {
 <div class="modal fade show" id="modal" style="display:block; background-color: rgba(10,10,10,.8);"
      aria-modal="true" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content modal-xl">
             <div class="modal-header">
             </div>
             <div class="modal-body">
+                <div class="flex-container">
+                    <div class="col">
+                        <div class="row mt-2" title="@Task.Name">
+                            <div class="col">
+                                <p>
+                                    @Task.Name
+                                </p>
+                            </div>
+
+                            <div class="col-2">
+                               <p>
+                                    Task-#####
+                               </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <select @bind="_state">
                     @foreach(string opt in tc.States)
                     {
                         <option value="@opt">@opt</option>        
                     }
                 </select>
+
             </div>
             <div class="modal-footer">
                 <button @onclick="Save">Save</button>
@@ -32,7 +80,43 @@ data-toggle="modal" data-target="#frost-modal"
     </div>
 </div>
 }
+<style>
+    .task{
+        border:2px solid #462f65;
+    }
 
+    .priority-high{
+        border-left:10px solid red;
+    }
+
+    .status-ToDo{
+        background-color:#0197db4f;
+        border-radius: 25px;
+    }
+
+    .status-Started{
+        background-color:#22ec55c2;
+        border-radius: 25px;
+    }
+
+    .status-Completed{
+        background-color:#fcb514;
+        border-radius: 25px;
+    }
+
+    .task-link{
+        float:right;
+        position:relative;
+        left:3.5rem;
+        top:1rem;
+    }
+    .task-icons{
+        float:left;
+        position:relative;
+        left:1.5rem;
+        top:1rem;
+    }
+</style>
 @code{
     [Parameter] public FrostTask Task { get; set; }
 

@@ -9,7 +9,7 @@
     [Parameter] public string State { get; set; }
 
     FrostTask? _movingTask = null;
-    private string _active = "border:2px solid black;height:200px;";
+    private string _active = "border-left:2px solid #462f658f;border-right:2px solid #462f658f;height:600px;";
 
     private void HandleDragOver(MouseEventArgs e)
     {
@@ -20,16 +20,16 @@
         _movingTask = tc.Tasks.Where(t => t.IsDragging).First();
         if(_movingTask.State != State)
         {
-            _active = "border:2px dashed green;height:200px;";
+            _active = "border-left:2px dashed green;border-right:2px dashed green;height:600px;";
         }
         if(_movingTask.State == State)
         {
-            _active = "border:2px dashed red;height:200px;"; 
+            _active = "border-left:2px dashed red;border-right:2px dashed red;height:600px;"; 
         }
     }
     private void HandleDragLeave(MouseEventArgs e)
     {
-        _active = "border:2px solid black;height:200px;";
+        _active = "border-left:2px solid black;border-right:2px solid black;height:600px;";
     }
 
     private void HandleDrop(MouseEventArgs e)
@@ -38,6 +38,6 @@
         _movingTask.IsDragging = false; //we are working with a copy since we do not have direct access to the task from the container, if we do not set the values on the copy, there will be multiple that "are dragging"
         tc.SaveTaskChanges(_movingTask);
         _movingTask = null;
-        _active = "border:2px solid black;height:200px;";
+        _active = "border-left:2px solid #462f658f;border-right:2px solid #462f658f;height:600px;";
     }
 }

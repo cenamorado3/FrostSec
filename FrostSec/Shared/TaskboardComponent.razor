@@ -6,7 +6,7 @@
     @foreach (string state in tc.States)
     {
         <div class="col-3 m-auto" ondragover="event.preventDefault();">
-            <p class="text-center ">@state</p>
+            <p class="text-center">@state</p>
             <TasksContainer State="@state">
                 @foreach (FrostTask task in tc.Tasks)
                 {
