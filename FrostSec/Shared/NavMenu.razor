@@ -1,22 +1,32 @@
-﻿<div class="frostsec-navbar text-center flex-container">
+﻿@inject  IJSRuntime js
+<div class="frostsec-navbar text-center flex-container">
     <div class="row frost-row m-auto">
         <div class="frost-nav-item col m-auto">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home p-2" aria-hidden="true"/> Home
+                <span class="oi oi-home p-2" aria-hidden="true"/>
             </NavLink>
         </div>
         <div class="frost-nav-item col m-auto">
             <NavLink class="nav-link" href="archive" Match="NavLinkMatch.Prefix" ActiveClass="active">
-                <span class="oi oi-wrench p-2" aria-hidden="true"/> Fun 
+                <span class="oi oi-wrench p-2" aria-hidden="true"/>  
             </NavLink>
         </div>
         <div class="frost-nav-item col m-auto">
             <NavLink class="nav-link" href="contactme" Match="NavLinkMatch.All">
-                <span class="oi oi-terminal p-2" aria-hidden="true"/> Contact
+                <span class="oi oi-terminal p-2" aria-hidden="true"/> 
             </NavLink>
+        </div>
+        <div class="frost-nav-item col m-auto" @onclick="LightSwitch">
+            <span class="p-2 oi oi-lightbulb @lightCSS" style="height:50px;width:50px;top:5px;"></span>
         </div>
     </div>
 </div>
+
+@if(funnyTime)
+{
+     <img src="@gif" style="display:block;position:absolute;left:40%;top:20%;z-index:200;">
+}
+
 <style>
     .frost-row{
         width:25%;
@@ -43,6 +53,48 @@
     .active {
         color: #462f65;
     }
+    .lights-on{
+       color: gold;
+    }
 
-
+    .lights-off{
+       color: black;
+    }
 </style>
+@code{
+
+    private bool lightsOn = true;
+    private bool funnyTime = false;
+    private string gif = "";
+    private string lightCSS = "lights-on";
+    private async void LightSwitch()
+    {
+        lightsOn = !lightsOn;
+        if (lightsOn)
+        {
+            lightCSS = "lights-on";
+            await js.InvokeVoidAsync("LightsOn", "");
+            funnyTime = true;
+            gif = "funny.gif";
+            StateHasChanged();
+            bool done = await Task.Run(() =>
+            {
+                System.Threading.Thread.Sleep(2100);
+                return true;
+            });
+
+            if(done) 
+            {
+                funnyTime = false;
+            }
+            StateHasChanged();
+        }
+        if(!lightsOn)
+        {
+            gif = "";
+            funnyTime = false;
+            lightCSS = "lights-off";
+            await js.InvokeVoidAsync("LightsOff", "");
+        }
+    }
+}

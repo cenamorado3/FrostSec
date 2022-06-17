@@ -16,7 +16,7 @@
 </head>
 <body>
     @RenderBody()
-
+    <div class="io lightbulb-alt-on" style="height:50px;width:50px;"></div>
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
@@ -29,6 +29,16 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+    <script>
+        function LightsOff(){
+            document.body.style.backgroundColor = "#242424";
+            document.body.style.color = "white";
+        }
+        function LightsOn(){
+            document.body.style.backgroundColor = "#e3f3f8";
+            document.body.style.color = "#462f65";
+        }
+    </script>
 </body>
 </html>
 
@@ -36,5 +46,7 @@
 <style>
     body{
         background-color:#e3f3f8;
+        color:#462f65;
     }
+
 </style>
