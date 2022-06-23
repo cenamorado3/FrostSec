@@ -5,6 +5,7 @@
         public FrostTask()
         {
             Id = new Random().Next(1000, 2000);
+            Comments.Push(new() {Id=0,Message= "This is an example" });
         }
 
         public string Name { get; set; }
@@ -22,5 +23,6 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
         public bool IsDragging { get; set; } = false;
         public int Id { get; set; }
         public int Points { get; set; }
+        public Stack<Comment> Comments { get; set; } = new();
     }
 }

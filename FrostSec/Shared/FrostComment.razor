@@ -1,0 +1,15 @@
+﻿@inject TasksCapacitor tc
+<div class="m-4" style="border-bottom:2px solid #154b643d;">
+    <FrostText Text="@Comment.Message" TextChanged="EditComment"/>
+</div>
+
+@code {
+    [Parameter] public Comment Comment { get; set; }
+    [Parameter] public FrostTask Task { get; set; }
+
+    private void EditComment(string updateComment)
+    {
+        Comment.Message = updateComment;
+        tc.SaveTaskChanges(Task);
+    }
+}
