@@ -30,13 +30,22 @@
 
     <script src="_framework/blazor.server.js"></script>
     <script>
+    var bg = '#e3f3f8';
         function LightsOff(){
             document.body.style.backgroundColor = "#242424";
             document.body.style.color = "white";
+            bg = '#242424';
+            return "#242424";
         }
         function LightsOn(){
             document.body.style.backgroundColor = "#e3f3f8";
             document.body.style.color = "#462f65";
+            bg = '#e3f3f8';
+            return "#e3f3f8";
+        }
+
+        function GetDarkMode(){
+            return bg;
         }
     </script>
 </body>
@@ -48,5 +57,7 @@
         background-color:#e3f3f8;
         color:#462f65;
     }
-
+    .modal-content{
+        background-color:#e3f3f8;
+    }
 </style>

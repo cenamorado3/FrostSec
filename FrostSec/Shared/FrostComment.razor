@@ -1,7 +1,9 @@
 ﻿@inject TasksCapacitor tc
-<div class="m-4" style="border-bottom:2px solid #154b643d;">
-    <FrostText Text="@Comment.Message" TextChanged="EditComment"/>
+<div class="mt-4" style="border-bottom:2px solid #154b643d;">
+    <FrostText Text="@Comment.Message" TextChanged="EditComment" 
+    DeleteCallback="DeleteComment"/>
 </div>
+
 
 @code {
     [Parameter] public Comment Comment { get; set; }
@@ -9,7 +11,16 @@
 
     private void EditComment(string updateComment)
     {
-        Comment.Message = updateComment;
+        Comment.Message = updateComment.Trim();
         tc.SaveTaskChanges(Task);
+    }
+
+    private void DeleteComment(bool delete)
+    {
+        if(delete)
+        {
+            Task.Comments.Remove(Comment);
+            tc.SaveTaskChanges(Task);
+        }
     }
 }

@@ -16,9 +16,19 @@
                 <span class="oi oi-terminal p-2" aria-hidden="true"/> 
             </NavLink>
         </div>
-        <div class="frost-nav-item col m-auto" @onclick="LightSwitch">
-            <span class="p-2 oi oi-lightbulb @lightCSS" style="height:50px;width:50px;top:5px;"></span>
-        </div>
+        @if(funnyTime)
+        {
+            <div class="frost-nav-item col m-auto">
+                <span class="p-2 oi oi-lightbulb @lightCSS" style="height:50px;width:50px;top:5px;"></span>
+            </div>
+        }
+        @if(!funnyTime)
+        {
+            <div class="frost-nav-item col m-auto" @onclick="LightSwitch" >
+                <span class="p-2 oi oi-lightbulb @lightCSS" style="height:50px;width:50px;top:5px;"></span>
+            </div>
+        }
+
     </div>
 </div>
 
@@ -26,7 +36,6 @@
 {
      <img src="@gif" style="display:block;position:absolute;left:40%;top:20%;z-index:200;">
 }
-
 <style>
     .frost-row{
         width:25%;
@@ -62,18 +71,18 @@
     }
 </style>
 @code{
-
     private bool lightsOn = true;
     private bool funnyTime = false;
     private string gif = "";
     private string lightCSS = "lights-on";
     private async void LightSwitch()
     {
+
         lightsOn = !lightsOn;
         if (lightsOn)
         {
             lightCSS = "lights-on";
-            await js.InvokeVoidAsync("LightsOn", "");
+            await js.InvokeAsync<string>("LightsOn", "");
             funnyTime = true;
             gif = "funny.gif";
             StateHasChanged();
@@ -87,6 +96,7 @@
             {
                 funnyTime = false;
             }
+
             StateHasChanged();
         }
         if(!lightsOn)
@@ -94,7 +104,7 @@
             gif = "";
             funnyTime = false;
             lightCSS = "lights-off";
-            await js.InvokeVoidAsync("LightsOff", "");
+            await js.InvokeAsync<string>("LightsOff", "");
         }
     }
 }

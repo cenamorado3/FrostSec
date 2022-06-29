@@ -105,6 +105,13 @@ q {
     quotes: "\201C""\201D""\2018""\2019";
 }
 
+textarea {
+    /*slightly lighter than body*/
+    background-color: rgb(239, 251, 255);
+}
+
+/******************************************************************   end primative tags   ****************************************************************************/
+
 .frost-clip-text {
     white-space: nowrap;
     overflow: hidden;
@@ -121,4 +128,8 @@ q {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.frost-interactable {
+    color: #5f5371;
 }

@@ -1,13 +1,11 @@
 ﻿@inject IJSRuntime js
 @inject TasksCapacitor tc
-@using System.Windows.Input
 
 <br />
 @*can add a priority css with just border left example priority high on the next line *@
 <div class="m-auto w-75 task text-center" 
 draggable="true" @ondragenter="DragStartHandler" @ondragend="DragEndHandler"
 data-toggle="modal" data-target="#frost-modal"
-
 >
     <div class="flex-container">
         <div class="col mt-2">
@@ -45,77 +43,19 @@ data-toggle="modal" data-target="#frost-modal"
 <div class="modal fade show" id="modal" style="display:block; background-color: rgba(10,10,10,.8);"
      aria-modal="true" role="dialog">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content modal-xl">
-            <div class="modal-header">
-                <div class="container">
-                    <div class="row">
-                        <h4 class="col-10" style="text-align:left;" @onclick="Save">
-                            @Task.Name
-                        </h4>
-                        <h4 class="col" style="text-align:right;">
-                            <a href="@Task.ParentBoard/@Task.Id">@Task.ParentBoard-@Task.Id</a>
-                        </h4>
-                    </div>
-                </div>
+        <div class="modal-content modal-xl" style="background-color:@bg;">
+            <div class="container">
+                <p class="oi oi-x float-end mt-3" @onclick="ToggleEdit"></p>
             </div>
-            
             <div class="modal-body">
-                <div class="container">
-                    <div class="row" style="border-bottom:2px solid #154b643d;">
-                        <div class="col-10">
-                                <FrostText Text="@Task.Description" TextChanged="UpdateDescription"/>
-                        </div>
-                    
-                        <div class="col">
-                            <div class="container">
-                                <div class="col" style="float:right;">
-                                    <select @bind="_state">
-                                        @foreach(string state in tc.States)
-                                        {
-                                            @if(Task.State == state)
-                                            {
-                                                <option value="@state" selected="selected">@state</option>
-                                            }
-                                                @if(Task.State != state)
-                                            {
-                                                <option value="@state">@state</option>
-                                            }
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row m-4">
-                        <span class="text-center m-auto">
-                            <h4 class="text-center oi oi-warning d-inline">ROAD WORK AHEAD</h4>
-                            <h4 class="text-center oi oi-warning d-inline"></h4>
-                        </span>
-                    </div>
-
-                    <div class="row" style="border-bottom:2px solid #154b643d;">
-                        <FrostText TextChanged="AddComment" />
-                    </div>
-
-                    <div class="row" >
-                        @foreach(Comment comment in Task.Comments)
-                        {
-                            <FrostComment Comment="@comment" Task="Task"/>
-                        }
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="modal-footer m-4">
-                    <button class="btn btn-primary" @onclick="Save">Save</button>
-                    <button class="btn btn-danger" @onclick="Close">Close</button>
+                <TaskPage Task="Task"/>
             </div>
         </div>
     </div>
 </div>
 }
+
+
 <style>
     .task{
         border:2px solid #462f65;
@@ -158,50 +98,33 @@ data-toggle="modal" data-target="#frost-modal"
         resize:none;
     }
 </style>
+
+
+
 @code{
     [Parameter] public FrostTask Task { get; set; }
+    private bool edit = false;
+    private string _state = "";
+    private string bg = "";
     protected override Task OnInitializedAsync()
     {
         tc.OnChange += StateHandler;
         _state = Task.State;
         return base.OnInitializedAsync();
     }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        BG();
+        base.OnAfterRender(firstRender);
+    }
     private async void StateHandler()
     {
         await InvokeAsync(() => StateHasChanged());
     }
-    private bool edit = false;
-    private bool editDescription = false;
-    private string _state = "";
-    private string _description = "";
 
     private void ToggleEdit()
     {
         edit = !edit;
-    }
-    private void Save()
-    {
-        if (!string.IsNullOrEmpty(_state))
-        {
-            tc.AlterTask(Task, _state);
-        }
-        ToggleEdit();
-        editDescription = false;
-    }
-
-    private void UpdateState()
-    {
-        if (!string.IsNullOrEmpty(_state))
-        {
-            tc.AlterTask(Task, _state);
-        }
-        StateHasChanged();
-    }
-
-    private void Close()
-    {
-        ToggleEdit();
-        editDescription = false;
     }
 
     private void DragStartHandler(DragEventArgs e) 
@@ -214,21 +137,9 @@ data-toggle="modal" data-target="#frost-modal"
         Task.IsDragging = false;
     }
 
-    private void UpdateDescription(string updatedDescription)
+    private async void BG()
     {
-        Task.Description = updatedDescription.ToString();
-        editDescription = false;
-    }
-
-    private void AddComment(string newComment)
-    {
-        Task.Comments.Push(new() { Id = Task.Comments.Count, Message=newComment.ToString() });
-        StateHasChanged();
-    }
-
-    private void SaveComment(string newComment)
-    {
-        tc.SaveTaskChanges(Task);
+        bg = await js.InvokeAsync<string>("GetDarkMode");
         StateHasChanged();
     }
 }

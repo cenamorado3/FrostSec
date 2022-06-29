@@ -1,35 +1,67 @@
-﻿@if (!editText && !string.IsNullOrEmpty(Text))
+﻿@if (!editText && !EditOnly)
 {
-    <p class="frost-text-wrap" @onclick="EditDescription">
-        @Text
-    </p>
+    <div class="container">
+        <div class="row">
+           <p class="frost-text-wrap" @onclick="EditDescription">
+                @Text
+            </p>
+        </div> 
+ 
+        <div class="row">
+            <div class="col" > 
+                <p class="frost-interactable" @onclick="EditDescription">Edit</p>
+            </div>
+        </div>
+    </div>
 }
 
-@if (editText || string.IsNullOrEmpty(Text))
+@if (editText || EditOnly)
 {
-    <textarea placeholder="Add a Comment" @ref="editArea" class="w-100 h-100" rows="@rows" @bind="_textValue" @bind:event="oninput" @onkeyup="CloseDescription" @onfocusout="Close">
-        @Text
-    </textarea>
+    <div class="container">
+        <div class="row">
+        <textarea placeholder="Add a Comment" class="w-100 h-100" rows="@rows" @bind="_textValue" @bind:event="oninput" @onkeyup="CloseDescription">
+            @Text
+        </textarea>
+        </div> 
+ 
+        <div class="row w-25 mt-1">
+            <div class="col-sm-2" > 
+                <p class="frost-interactable" @onclick="(() => {TextChanged.InvokeAsync(_textValue.Trim());Close();})">Save</p>
+            </div>
+            @if (!DeleteCallback.HasDelegate)
+            {
+                <div class="col-sm-3" style="margin-left:1rem;"> 
+                    <p class="frost-interactable" @onclick="Close">Cancel</p>
+                </div>
+            }
+
+            @if(DeleteCallback.HasDelegate)
+            {
+                <div class="col-sm-3" > 
+                    <p class="frost-interactable" @onclick="Close">Cancel</p>
+                </div>
+
+                <div class="col-sm-3" > 
+                    <p class="frost-interactable" @onclick="(() => {DeleteCallback.InvokeAsync(true);Close();})">Delete</p>
+                </div>
+                
+            }
+        </div> 
+    </div>
+
 }
 
 @code{
     [Parameter]public string Text { get; set; }
+    [Parameter]public bool EditOnly { get; set; }
     [Parameter]public EventCallback<string> TextChanged { get; set; }
+    [Parameter]public EventCallback<bool> DeleteCallback { get; set; }
 
 
 
     private string _textValue;
     private bool editText = false;
     private int rows = 5;
-    private ElementReference editArea;
-
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-        if(!firstRender && editText)
-        {
-            await editArea.FocusAsync();
-        }
-    }
 
 
     private void EditDescription()
@@ -37,19 +69,6 @@
         editText = true;
         CalculateRows();
         _textValue = Text;
-    }
-
-    private void CloseDescription(KeyboardEventArgs e)
-    {
-        if(e.Key == "Enter" && !e.ShiftKey)
-        {
-            TextChanged.InvokeAsync(_textValue);
-            Close();
-        }
-        if(e.Key == "Escape")
-        {
-            Close();
-        }
     }
 
     private void CalculateRows()
@@ -71,9 +90,32 @@
         StateHasChanged();
     }
 
+    private void CloseDescription(KeyboardEventArgs e)
+    {
+        if(e.Key == "Enter" && !e.ShiftKey)
+        {
+            TextChanged.InvokeAsync(_textValue.Trim());
+            ResetText();
+            Close();
+        }
+        if(e.Key == "Escape")
+        {
+            Close();
+        }
+    }
+
     private void Close()
     {
         editText = false;
+        ResetText();
         StateHasChanged();
+    }
+
+    private void ResetText()
+    {
+        if(EditOnly)
+        {
+            _textValue = string.Empty;
+        }
     }
 }
