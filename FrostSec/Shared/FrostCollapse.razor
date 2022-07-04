@@ -1,7 +1,7 @@
 ﻿@if(!_collapse)
 {
 <div class="frost-collapse p-4 m-auto">
-    <div class=" flex-container">
+    <div class="flex-container">
         <div class="row w-100" @onclick="Collapse">
             <div class="col-6">
                  <h3>@Title</h3>
@@ -10,7 +10,6 @@
                 <div class="oi-lock-unlocked chevron-float-right"></div>
             </div>
         </div>
-
         <div class="row m-4 frost-text-wrap">
             @ChildContent
         </div>
@@ -21,7 +20,7 @@
 @if(_collapse)
 {
 <div class="frost-collapse p-4 m-auto">
-    <div class=" flex-container">
+    <div class="flex-container">
         <div class="row w-100" @onclick="Collapse">
             <div class="col-6">
                 <h3>@Title</h3>
@@ -46,7 +45,6 @@
         position:relative;
         top:7px;
     }
-
 </style>
 
 @code {

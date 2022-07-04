@@ -8,31 +8,31 @@ draggable="true" @ondragenter="DragStartHandler" @ondragend="DragEndHandler"
 data-toggle="modal" data-target="#frost-modal"
 >
     <div class="flex-container">
-        <div class="col mt-2">
-            <div class="row m-auto" title="@Task.Name" @onclick="ToggleEdit" style="cursor:pointer;">
+            <div class="row m-auto mobile-hide" title="@Task.Name" @onclick="ToggleEdit" style="cursor:pointer;">
                 <p class="m-auto frost-clip-text">
                     @Task.Name
                 </p>
             </div>
 
-            <div class="row mt-4" @onclick="ToggleEdit" style="cursor:pointer;">
+            <div class="row mt-4 mobile-hide" @onclick="ToggleEdit" style="cursor:pointer;">
                 <div class="status-@Task.State w-75 m-auto frost-clip-text">
                     @Task.State
                 </div>
             </div>
 
             <div class="row mt-4">
-                <div class="col-4 task-icons">
-                    <FrostCheckBox/>
+                <div class="col-6 mobile-hide">
+                    <div style="position:relative;left:1rem;" class="d-md-none d-sm-none d-lg-none d-xl-block">
+                        <FrostCheckBox/>
+                    </div>
                     <img src="/favicon.png"/>
                     @Task.Points
                 </div>
 
-                <div class="col-4 task-link">
-                    <a href="@Task.ParentBoard/@Task.Id">@Task.ParentBoard-@Task.Id</a>
+                <div class="col-6 mobile-task">
+                    <a href="@Task.ParentBoard/@Task.Id">@Task.Id</a>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 
@@ -81,7 +81,6 @@ data-toggle="modal" data-target="#frost-modal"
     }
 
     .task-link{
-        float:right;
         position:relative;
         left:6.5rem;
     }
@@ -124,7 +123,9 @@ data-toggle="modal" data-target="#frost-modal"
 
     private void ToggleEdit()
     {
+        tc.SaveTaskChanges(Task);
         edit = !edit;
+        
     }
 
     private void DragStartHandler(DragEventArgs e) 
@@ -137,9 +138,27 @@ data-toggle="modal" data-target="#frost-modal"
         Task.IsDragging = false;
     }
 
+    private void TouchStartHandler(TouchEventArgs e) 
+    {
+        Task.IsDragging = true;
+    }
+
+    private void TouchEndHandler(TouchEventArgs e)
+    {
+        Task.IsDragging = false;
+    }
+
+
     private async void BG()
     {
-        bg = await js.InvokeAsync<string>("GetDarkMode");
-        StateHasChanged();
+        try
+        {
+            bg = await js.InvokeAsync<string>("GetDarkMode");
+            StateHasChanged();
+        }
+        catch (TaskCanceledException ex)
+        {
+            //swallow
+        }
     }
 }

@@ -1,0 +1,11 @@
+﻿@media (max-width: 800px) {
+    .mobile-task {
+        position: relative;
+        bottom: 1rem;
+        display: block;
+
+    }
+    .mobile-hide{
+        display:none;
+    }
+}

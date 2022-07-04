@@ -1,24 +1,23 @@
 ﻿@inject TasksCapacitor tc
 
 <div class="container mt-4">
-    <div class="row mt-4">
-        <h4 class="col-10" style="text-align:left;" @onclick="Save">
+    <div class="row mt-4 mobile-shrink">
+        <h4 class="col-10" style="text-align:left;">
             @Task.Name
         </h4>
-        <h4 class="col" style="text-align:right;">
-            <a href="@Task.ParentBoard/@Task.Id">@Task.ParentBoard-@Task.Id</a>
+        <h4 class="col-2" style="text-align:right;">
+            @Task.ParentBoard-@Task.Id
         </h4>
     </div>
 
-    <div class="row mt-4" style="border-bottom:2px solid #154b643d;">
+    <div class="row mt-4 mobile-shrink" style="border-bottom:2px solid #154b643d;">
         <div class="col-10">
                 <FrostText Text="@Task.Description" TextChanged="UpdateDescription"/>
         </div>
                     
-        <div class="col">
+        <div class="col-2">
             <div class="container">
-                <div class="col" style="float:right;">
-                    <select @bind="_state">
+                    <select @oninput="UpdateState">
                         @foreach(string state in tc.States)
                         {
                             @if(Task.State == state)
@@ -31,7 +30,6 @@
                             }
                         }
                     </select>
-                </div>
             </div>
         </div>
     </div>
@@ -60,7 +58,6 @@
         if (Task == null && Id > 0)
         {
             Task = tc.Tasks.Where(t => t.Id == Id).First();
-            
         }
         _state = Task.State;
         return base.OnInitializedAsync();
@@ -75,29 +72,39 @@
     }
 
 
-    private void UpdateState()
+    private void UpdateState(ChangeEventArgs e)
     {
-        if (!string.IsNullOrEmpty(_state))
+        if (e.Value is not null)
         {
-            tc.AlterTask(Task, _state);
+            Task.State = e.Value.ToString();
+
         }
         StateHasChanged();
     }
 
     internal void UpdateDescription(string updatedDescription)
     {
-        Task.Description = updatedDescription.ToString();
+        if(!string.IsNullOrEmpty(updatedDescription))
+        {
+            Task.Description = updatedDescription.ToString();
+        }
     }
 
     internal void AddComment(string newComment)
     {
-        Task.Comments.Insert(0, new() { Id = Task.Comments.Count, Message= newComment.ToString() });
-        StateHasChanged();
+        if (!string.IsNullOrEmpty(newComment))
+        {
+            Task.Comments.Insert(0, new() { Id = Task.Comments.Count, Message = newComment.ToString() });
+            StateHasChanged();
+        }
     }
 
     private void SaveComment(string newComment)
     {
-        tc.SaveTaskChanges(Task);
-        StateHasChanged();
+        if (!string.IsNullOrEmpty(newComment))
+        {
+            tc.SaveTaskChanges(Task);
+            StateHasChanged();
+        }
     }
 }
